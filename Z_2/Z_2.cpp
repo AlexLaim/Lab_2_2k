@@ -149,8 +149,16 @@ int main()
     drob2.printFrac(drob2);
     std::cout << "Дробь 3 в сокращенном виде: " << std::endl;
     drob3.printFrac(drob3);
+    std::cout << "Произведение дробей: " << std::endl;
+    drob1.printFrac(drob1 * drob2);
+    std::cout << "Частное дробей: " << std::endl;
+    drob1.printFrac(drob1 / drob2);
+    std::cout << "Сумма дробей: " << std::endl;
+    drob1.printFrac(drob1 + drob2);
+    std::cout << "Разность дробей: " << std::endl;
+    drob1.printFrac(drob1 - drob2);
     Fraction decimalFrac(0.25);
-    std::cout << "Входная дробь: " << std::endl;
+    std::cout << "Входная дробь(double): " << std::endl;
     std::cout << decimalFrac.GetDecimal(decimalFrac);
     std::cout << "\nДесятичная дробь: " << std::endl;
     decimalFrac.printDecimalFrac(decimalFrac);
