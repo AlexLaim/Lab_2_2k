@@ -105,6 +105,10 @@ public:
     int GetYearOfProd(Auto car) {
         return car.yearOfProd;
     }
+
+    auto GetNumber(Auto car) {
+        return car.number;
+    }
 };
 
 static std::vector<Auto> cars;
@@ -147,17 +151,32 @@ int main()
     car_4.setMileage();
     cars.push_back(car_4);
     std::cout << "Информация по всем автомобилям: " << std::endl;      
-   // sort(cars.begin(), cars.end(), comp);
-    Auto tmp;
-    int count = 0;
+    Auto tmp, tmp2;
+    int j=1;
     sort(cars.begin(), cars.end(), comp);
     for (int i = 0; i < cars.size(); i++)
-    {
-            if (cars[i].GetYearOfProd(cars[i]) >= 2011) {               
+    {   
+        if (cars[i].GetYearOfProd(cars[i]) >= 2011 && cars[j].GetYearOfProd(cars[j]) >= 2011 && (cars[i].GetNumber(cars[i]) != cars[j].GetNumber(cars[j]))) {
+            if (cars[i].GetMileage(cars[i]) > cars[j].GetMileage(cars[j])) {
                 tmp = cars[i];
+                tmp2 = cars[j];
+                cars.erase(cars.begin() + j);
+                cars.erase(cars.begin() + i);             
+                cars.insert(cars.begin(), tmp2);
+                cars.insert(cars.begin(), tmp);
+            }
+            else if (cars[i].GetMileage(cars[i]) < cars[j].GetMileage(cars[j])) {
+                tmp = cars[i];
+                tmp2 = cars[j];
+                cars.erase(cars.begin() + j);
                 cars.erase(cars.begin() + i);
                 cars.insert(cars.begin(), tmp);
-            }             
+                cars.insert(cars.begin(), tmp2);
+            }
+        }
+        if (j!= cars.size()-1) {
+            j++;
+        }                
     } 
     for (int i = 0;i < cars.size();i++) {
         
