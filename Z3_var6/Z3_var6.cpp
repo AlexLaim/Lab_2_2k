@@ -4,6 +4,7 @@
 #include <sstream>
 #include <fstream>
 #include <Windows.h>
+#include <algorithm>
 
 class Auto {
 private:
@@ -53,6 +54,10 @@ public:
         return mileage;
     }
 
+    int GetMileage(Auto car) {
+        return car.mileage;
+    }
+
     void printInfo(Auto car) {
         std::cout << "Фирма: " << car.company << std::endl;
         std::cout << "Модель: " << car.model << std::endl;
@@ -97,9 +102,16 @@ public:
         return car.model;
     }
 
+    int GetYearOfProd(Auto car) {
+        return car.yearOfProd;
+    }
 };
 
 static std::vector<Auto> cars;
+
+bool comp(Auto a, Auto b) {
+    return (a.GetMileage(a) > b.GetMileage(b));
+};
 
 int main()
 {
@@ -134,8 +146,21 @@ int main()
     car_4.setYearOfProd(2013);
     car_4.setMileage();
     cars.push_back(car_4);
-    std::cout << "Информация по всем автомобилям: " << std::endl;
+    std::cout << "Информация по всем автомобилям: " << std::endl;      
+   // sort(cars.begin(), cars.end(), comp);
+    Auto tmp;
+    int count = 0;
+    sort(cars.begin(), cars.end(), comp);
+    for (int i = 0; i < cars.size(); i++)
+    {
+            if (cars[i].GetYearOfProd(cars[i]) >= 2011) {               
+                tmp = cars[i];
+                cars.erase(cars.begin() + i);
+                cars.insert(cars.begin(), tmp);
+            }             
+    } 
     for (int i = 0;i < cars.size();i++) {
+        
         cars[i].printInfo(cars[i]);
     }
     std::cout << std::endl;
